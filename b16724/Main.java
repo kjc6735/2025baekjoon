@@ -81,7 +81,6 @@ public class Main {
             visited[tmpX][tmpY] = true;
 
             queue.add(new int[] { tmpX, tmpY });
-            System.out.println(tmpX + " " + tmpY);
           }
         }
       }
