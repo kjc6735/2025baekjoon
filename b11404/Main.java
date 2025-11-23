@@ -42,7 +42,7 @@ public class Main {
     StringBuilder sb = new StringBuilder();
     for (int a = 1; a <= N; a++) {
       for (int c = 1; c <= N; c++) {
-        sb.append(arr[a][c]).append(" ");
+        sb.append(arr[a][c] >= 10_000_000 ? 0 : arr[a][c]).append(" ");
       }
       sb.append("\n");
     }
