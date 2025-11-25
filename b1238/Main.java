@@ -9,7 +9,7 @@ import java.util.StringTokenizer;
 public class Main {
   static boolean[] visited = new boolean[1001];
   static int dist[] = new int[1001];
-
+  static int dist2[] = new int[1001];
   static int N, M, X;
   static int arr[][] = new int[1001][1001];
 
@@ -35,20 +35,21 @@ public class Main {
     }
 
     int result = 0;
+    fn2(X, dist2);
     for (int i = 1; i <= N; i++) {
       if (i == X)
         continue;
 
-      int a = fn(i, X);
-      int b = fn(X, i);
-      result = Math.max(result, a + b);
+      int a = fn(i, X, dist);
+
+      result = Math.max(result, a + dist2[i]);
     }
 
     System.out.println(result);
 
   }
 
-  static int fn(int start, int dst) {
+  static int fn(int start, int dst, int dist[]) {
     PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[1] - b[1]);
     Arrays.fill(dist, Integer.MAX_VALUE);
     Arrays.fill(visited, false);
@@ -68,12 +69,37 @@ public class Main {
       for (int v = 1; v <= N; v++) {
         if (dist[v] > dist[u] + arr[u][v]) {
           dist[v] = dist[u] + arr[u][v];
-          pq.add(new int[] { dist[v], v });
+          pq.add(new int[] { v, dist[v] });
         }
       }
     }
 
     return Integer.MAX_VALUE;
+  }
+
+  static void fn2(int start, int dist[]) {
+    PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[1] - b[1]);
+    Arrays.fill(dist, Integer.MAX_VALUE);
+    Arrays.fill(visited, false);
+
+    dist[start] = 0;
+    pq.add(new int[] { start, 0 });
+    while (!pq.isEmpty()) {
+      int[] curr = pq.poll();
+      int u = curr[0];
+      if (visited[u])
+        continue;
+
+      visited[u] = true;
+
+      for (int v = 1; v <= N; v++) {
+        if (dist[v] > dist[u] + arr[u][v]) {
+          dist[v] = dist[u] + arr[u][v];
+          pq.add(new int[] { v, dist[v] });
+        }
+      }
+    }
+
   }
 
 }
