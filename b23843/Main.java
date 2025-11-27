@@ -25,7 +25,6 @@ public class Main {
     for (int i = N - 1; i >= 0; i--) {
       tmp[0] += arr[i];
       Arrays.sort(tmp);
-      System.out.println(Arrays.toString(tmp));
     }
 
     for (int i = 0; i < M; i++) {
