@@ -37,7 +37,7 @@ public class Main {
       } else {
         t = mid - 1;
       }
-      // 최대 길이보다 짧으면
+
     }
     System.out.println(maxLen);
 
